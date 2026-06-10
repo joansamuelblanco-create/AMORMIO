@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Para mi Tiburoncín ❤️</title>
+
+    <link rel="icon"
+    href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🦈❤️</text></svg>'>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <title>Entrar — Tiburoncin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;1,300&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+  <div class="film-grain"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <div class="login-wrapper">
+
+    <!-- Logo -->
+    <div class="login-brand">
+      <svg class="shark-logo" viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="55" cy="42" rx="40" ry="22" fill="#2a2a2e" stroke="rgba(255,255,255,0.15)" stroke-width="1.2"/>
+        <ellipse cx="50" cy="48" rx="28" ry="12" fill="#1a1a1f"/>
+        <path d="M48 20 L58 8 L68 22" fill="#2a2a2e" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M90 35 L108 20 L108 38" fill="#2a2a2e" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M90 46 L108 55 L108 38" fill="#252528" stroke="rgba(255,255,255,0.12)" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M55 50 L45 62 L65 56" fill="#252528" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+        <circle cx="24" cy="40" r="3.5" fill="rgba(255,255,255,0.08)"/>
+        <circle cx="24" cy="40" r="2" fill="#0a0a0f"/>
+        <circle cx="25" cy="39" r="0.7" fill="rgba(255,255,255,0.6)"/>
+        <path d="M14 45 Q18 49 24 47" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-linecap="round"/>
+        <ellipse cx="40" cy="35" rx="15" ry="6" fill="rgba(255,255,255,0.03)"/>
+      </svg>
+      <span class="brand-name">Tiburoncin.</span>
+    </div>
+
+    <!-- Card -->
+    <div class="login-card">
+      <div class="login-header">
+        <h1 class="login-title">Bienvenida de vuelta</h1>
+        <p class="login-subtitle">Este espacio fue hecho con amor, solo para ti 🤍</p>
+      </div>
+
+      <div class="login-form">
+        <!-- Usuario -->
+        <div class="field-group">
+          <label class="field-label">Usuario</label>
+          <div class="field-wrapper">
+            <span class="field-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+              </svg>
+            </span>
+            <input
+              type="text"
+              id="usernameInput"
+              class="field-input"
+              placeholder="isa"
+              autocomplete="off"
+              autocorrect="off"
+              spellcheck="false"
+            />
+          </div>
+        </div>
+
+        <!-- Contraseña -->
+        <div class="field-group">
+          <label class="field-label">Contraseña</label>
+          <div class="field-wrapper">
+            <span class="field-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>
+              </svg>
+            </span>
+            <input
+              type="password"
+              id="passwordInput"
+              class="field-input"
+              placeholder="••••••••"
+              autocomplete="current-password"
+            />
+            <button class="toggle-pass" id="togglePass" type="button" tabindex="-1">
+              <svg id="eyeIcon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Error -->
+        <p class="error-msg" id="errorMsg"></p>
+
+        <!-- Botón -->
+        <button class="btn-enter" id="btnEnter" type="button">
+          <span id="btnText">Entrar</span>
+          <span id="btnLoader" class="btn-spinner hidden"></span>
+        </button>
+      </div>
+
+      <p class="login-footer-text">
+        Nuestra historia comenzó con una oración<br>y sigue escribiéndose con amor. 🦈
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBCfIB1RkcSQhjK1wKx-C_TePNcDsLO0ek",
+      authDomain: "amormio-aeb40.firebaseapp.com",
+      projectId: "amormio-aeb40",
+      storageBucket: "amormio-aeb40.firebasestorage.app",
+      messagingSenderId: "916568525549",
+      appId: "1:916568525549:web:060238a52905fa41b45ae4"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const btnEnter = document.getElementById('btnEnter');
+    const btnText = document.getElementById('btnText');
+    const btnLoader = document.getElementById('btnLoader');
+    const errorMsg = document.getElementById('errorMsg');
+    const togglePass = document.getElementById('togglePass');
+    const passInput = document.getElementById('passwordInput');
+    const userInput = document.getElementById('usernameInput');
+
+    // Toggle contraseña visible
+    togglePass.addEventListener('click', () => {
+      const isPass = passInput.type === 'password';
+      passInput.type = isPass ? 'text' : 'password';
+    });
+
+    // Enter en inputs
+    [userInput, passInput].forEach(el => {
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter') handleLogin();
+      });
+    });
+
+    btnEnter.addEventListener('click', handleLogin);
+
+    function handleLogin() {
+      const username = userInput.value.trim().toLowerCase();
+      const password = passInput.value;
+
+      if (!username || !password) {
+        showError('Por favor completa todos los campos.');
+        return;
+      }
+
+      // Construye email ficticio
+      const email = username + '@amormio.com';
+
+      setLoading(true);
+      errorMsg.textContent = '';
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          // Guarda sesión en sessionStorage
+          sessionStorage.setItem('amormio_auth', 'true');
+          sessionStorage.setItem('amormio_user', username);
+          // Fade out y redirige
+          document.body.style.transition = 'opacity 0.6s ease';
+          document.body.style.opacity = '0';
+          setTimeout(() => { window.location.href = 'index.html'; }, 600);
+        })
+        .catch(err => {
+          setLoading(false);
+          if (err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
+            showError('Contraseña incorrecta. Inténtalo de nuevo.');
+          } else if (err.code === 'auth/user-not-found') {
+            showError('Usuario no encontrado.');
+          } else if (err.code === 'auth/too-many-requests') {
+            showError('Demasiados intentos. Espera un momento.');
+          } else {
+            showError('Algo salió mal. Inténtalo de nuevo.');
+          }
+        });
+    }
+
+    function setLoading(state) {
+      btnEnter.disabled = state;
+      btnText.classList.toggle('hidden', state);
+      btnLoader.classList.toggle('hidden', !state);
+    }
+
+    function showError(msg) {
+      errorMsg.textContent = msg;
+      errorMsg.style.animation = 'none';
+      requestAnimationFrame(() => { errorMsg.style.animation = ''; });
+    }
+  </script>
+
+</body>
+</html>

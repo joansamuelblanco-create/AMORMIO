@@ -1,0 +1,161 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #050508;
+  color: white;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Grain */
+.film-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* Glows */
+.glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+.glow-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(244,63,94,0.08) 0%, transparent 70%);
+  top: -100px; left: -100px;
+  animation: glowMove1 8s ease-in-out infinite alternate;
+}
+.glow-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(100,100,200,0.06) 0%, transparent 70%);
+  bottom: -80px; right: -80px;
+  animation: glowMove2 10s ease-in-out infinite alternate;
+}
+@keyframes glowMove1 { to { transform: translate(60px, 80px); } }
+@keyframes glowMove2 { to { transform: translate(-60px, -60px); } }
+
+/* Wrapper */
+.loader-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Tiburoncín */
+.shark-container {
+  animation: sharkSwim 3s ease-in-out infinite;
+}
+.shark-svg {
+  width: 140px;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(244,63,94,0.15));
+}
+@keyframes sharkSwim {
+  0%, 100% { transform: translateY(0px) rotate(-1deg); }
+  25% { transform: translateY(-8px) rotate(1deg); }
+  50% { transform: translateY(-4px) rotate(-0.5deg); }
+  75% { transform: translateY(-10px) rotate(1.5deg); }
+}
+
+/* Texto */
+.loader-text-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.loading-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.5);
+  animation: fadeInUp 1s ease forwards;
+}
+.loading-sub {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255,255,255,0.9);
+  animation: fadeInUp 1s ease 0.3s both;
+}
+.heart {
+  display: inline-block;
+  animation: heartBeat 1.2s ease-in-out infinite;
+}
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+/* Barra de progreso */
+.progress-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 280px;
+  animation: fadeInUp 1s ease 0.5s both;
+}
+.progress-bar-track {
+  width: 100%;
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, rgba(244,63,94,0.6), rgba(244,63,94,1));
+  border-radius: 99px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 12px rgba(244,63,94,0.5);
+}
+.progress-phrase {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(244,63,94,0.7);
+  transition: opacity 0.4s ease;
+  min-height: 1em;
+}
+.progress-percent {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.2);
+  animation: fadeInUp 1s ease 0.7s both;
+}
+
+/* Animaciones entrada */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Fade out al terminar */
+body.fade-out {
+  animation: pageFadeOut 0.8s ease forwards;
+}
+@keyframes pageFadeOut {
+  to { opacity: 0; }
+}

@@ -1,0 +1,258 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #050508;
+  color: white;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Grain */
+.film-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* Glows */
+.glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+.glow-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(244,63,94,0.07) 0%, transparent 70%);
+  top: -150px; left: -150px;
+  animation: g1 9s ease-in-out infinite alternate;
+}
+.glow-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(80,80,180,0.05) 0%, transparent 70%);
+  bottom: -100px; right: -100px;
+  animation: g2 11s ease-in-out infinite alternate;
+}
+@keyframes g1 { to { transform: translate(80px, 100px); } }
+@keyframes g2 { to { transform: translate(-80px, -80px); } }
+
+/* Wrapper */
+.login-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+  animation: fadeInUp 0.9s ease both;
+}
+
+/* Brand */
+.login-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+.shark-logo {
+  width: 80px;
+  height: auto;
+  filter: drop-shadow(0 0 16px rgba(244,63,94,0.12));
+  animation: sharkFloat 3s ease-in-out infinite;
+}
+@keyframes sharkFloat {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-6px) rotate(1deg); }
+}
+.brand-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+}
+
+/* Card */
+.login-card {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-shadow: 0 32px 64px rgba(0,0,0,0.4);
+}
+
+/* Header */
+.login-header { text-align: center; }
+.login-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255,255,255,0.92);
+  margin-bottom: 0.5rem;
+}
+.login-subtitle {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.03em;
+}
+
+/* Form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.field-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+.field-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.field-icon {
+  position: absolute;
+  left: 14px;
+  color: rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+.field-input {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 0.85rem 3rem 0.85rem 2.75rem;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.85);
+  outline: none;
+  transition: border-color 0.3s ease, background 0.3s ease;
+  caret-color: rgba(244,63,94,0.8);
+}
+.field-input::placeholder { color: rgba(255,255,255,0.2); }
+.field-input:focus {
+  border-color: rgba(244,63,94,0.4);
+  background: rgba(255,255,255,0.06);
+}
+.toggle-pass {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  transition: color 0.2s;
+}
+.toggle-pass:hover { color: rgba(255,255,255,0.5); }
+
+/* Error */
+.error-msg {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(244,63,94,0.8);
+  text-align: center;
+  min-height: 1.2em;
+  animation: shake 0.4s ease;
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* Botón */
+.btn-enter {
+  width: 100%;
+  padding: 0.95rem;
+  background: rgba(244,63,94,0.12);
+  border: 1px solid rgba(244,63,94,0.25);
+  border-radius: 12px;
+  color: rgba(255,255,255,0.85);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+.btn-enter:hover:not(:disabled) {
+  background: rgba(244,63,94,0.2);
+  border-color: rgba(244,63,94,0.45);
+  transform: translateY(-1px);
+}
+.btn-enter:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Spinner */
+.btn-spinner {
+  width: 16px; height: 16px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-top-color: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Footer text */
+.login-footer-text {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.2);
+  text-align: center;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+}
+
+/* Utils */
+.hidden { display: none !important; }
+
+/* Entrada */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .login-card { padding: 2rem 1.5rem; }
+  .login-title { font-size: 1.35rem; }
+}

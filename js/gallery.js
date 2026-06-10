@@ -1,262 +1,259 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const masonryGrid = document.getElementById('masonry-grid');
-    const videoTrack = document.querySelector('.video-track');
-    const videoSlider = document.querySelector('.video-pinterest-slider');
-    
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxCounter = document.getElementById('lightbox-counter');
-    const lightboxCaption = document.getElementById('lightbox-caption');
-    const closeLightboxBtn = document.getElementById('close-lightbox');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
+// ===== AUTH CHECK =====
+(function() {
+  if (!sessionStorage.getItem('amormio_auth')) {
+    window.location.href = 'login.html';
+  }
+})();
 
-    let currentActiveIndex = 1;
-    const totalImages = 50;
-    const totalVideos = 8; // Limitado exactamente a tus 8 videos requeridos
-    
-    // Metadatos adaptados e íntimos para Isa e Isabella
-    const moodCaptions = [
-        "In fleeting daylight — Isa", "Shadows against your skin", "The luxury of quiet hours",
-        "Soft contours and heavy thoughts", "Fleeting frames, remembered", "Captured mid-laugh — Isa",
-        "Echoes of gold light", "Moments before sunrise", "Editorial framework of Isabella",
-        "A quiet, cinematic gaze", "Silhouette dynamics", "Postures of warmth and light"
-    ];
+// ===== CURSOR =====
+const shark = document.getElementById('cursor-shark');
+const trail = document.getElementById('cursor-trail');
+let mouseX = 0, mouseY = 0, trailX = 0, trailY = 0, lastX = 0;
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  if (e.clientX < lastX) shark.classList.add('flipped');
+  else if (e.clientX > lastX) shark.classList.remove('flipped');
+  lastX = e.clientX;
+});
+function animateCursor() {
+  shark.style.left = mouseX + 'px';
+  shark.style.top = mouseY + 'px';
+  trailX += (mouseX - trailX) * 0.12;
+  trailY += (mouseY - trailY) * 0.12;
+  trail.style.left = trailX + 'px';
+  trail.style.top = trailY + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
 
-    // 1. INYECCIÓN Y CONSTRUCCIÓN INTERACTIVA DE VIDEOS (Estilo Pinterest)
-    function generateVideoSlider() {
-        if (!videoTrack) return;
-        let videoHTML = '';
-        
-        // Formatos asimétricos alternados para dar el look estético y fluido de Pinterest
-        const videoSizes = [
-            { w: '260px', h: '440px', mt: 'mt-0' },
-            { w: '320px', h: '400px', mt: 'mt-8' },
-            { w: '280px', h: '460px', mt: 'mt-2' },
-            { w: '300px', h: '420px', mt: 'mt-12' },
-            { w: '270px', h: '450px', mt: 'mt-0' },
-            { w: '310px', h: '390px', mt: 'mt-6' },
-            { w: '290px', h: '470px', mt: 'mt-4' },
-            { w: '330px', h: '410px', mt: 'mt-10' }
-        ];
+// ===== NAVBAR SCROLL =====
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
 
-        for (let i = 1; i <= totalVideos; i++) {
-            const layout = videoSizes[(i - 1) % videoSizes.length];
-            videoHTML += `
-                <div class="video-card ${layout.mt} shrink-0 relative overflow-hidden rounded-2xl group cursor-pointer" style="width: ${layout.w};">
-                    <video class="w-full object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none" style="height: ${layout.h};" loop muted playsinline poster="assets/img/gallery/${i}.jpg">
-                        <source src="assets/video/${i}.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent flex flex-col justify-between p-5 transition-opacity duration-300">
-                        <div class="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-80 group-hover:opacity-100 self-end">
-                            <span class="play-icon text-white text-xs">▶</span>
-                        </div>
-                        <div>
-                            <span class="font-space text-[10px] tracking-widest text-rose-400 uppercase block mb-1">Clip #${i}</span>
-                            <p class="font-sans text-xs italic text-white/80">Isa — Motion File</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-        videoTrack.innerHTML = videoHTML;
-        registerVideoInteractions();
-        initializeInertialVideoSlider();
-    }
+// ===== DATOS =====
+// Fotos: agrega todas las que tengas en assets/img/gallery/
+// Formato soportado: jpg, jpeg, png, webp, avif
+const photos = [
+  { src: 'assets/img/gallery/1.jpg', caption: 'Mi lugar favorito siempre será a tu lado. 🤍' },
+  { src: 'assets/img/gallery/2.jpg', caption: 'Dios fue bueno conmigo cuando te puso en mi camino.' },
+  { src: 'assets/img/gallery/3.jpg', caption: 'Mi tiburoncín favorito. 🦈💖' },
+  { src: 'assets/img/gallery/4.jpg', caption: 'Contigo, todo tiene más sentido.' },
+  { src: 'assets/img/gallery/5.jpg', caption: 'Eres una de mis oraciones respondidas.' },
+  { src: 'assets/img/gallery/6.jpg', caption: 'Qué bonito es coincidir contigo.' },
+  { src: 'assets/img/gallery/7.jpg', caption: 'Mi corazón sonríe cuando te ve.' },
+  { src: 'assets/img/gallery/8.jpg', caption: 'Tú haces especiales los días normales.' },
+  { src: 'assets/img/gallery/9.jpg', caption: 'Gracias por existir.' },
+  { src: 'assets/img/gallery/10.jpg', caption: 'Un pedacito de cielo en la tierra.' },
+  { src: 'assets/img/gallery/11.jpg', caption: 'Mi paz tiene tu nombre.' },
+  { src: 'assets/img/gallery/12.jpg', caption: 'Siempre tú.' },
+  { src: 'assets/img/gallery/13.jpg', caption: 'Dios escribe historias hermosas.' },
+  { src: 'assets/img/gallery/14.jpg', caption: 'Mi persona favorita.' },
+  { src: 'assets/img/gallery/15.jpg', caption: 'Amor con propósito.' },
+  { src: 'assets/img/gallery/16.jpg', caption: 'Qué suerte la mía.' },
+  { src: 'assets/img/gallery/17.jpg', caption: 'Tú y yo, bajo la gracia de Dios.' },
+  { src: 'assets/img/gallery/18.jpg', caption: 'Más que una casualidad, una bendición.' },
+  { src: 'assets/img/gallery/19.jpg', caption: 'Donde estés tú, quiero estar yo.' },
+  { src: 'assets/img/gallery/20.jpg', caption: 'Mi mejor fotografía siempre eres tú.' },
+  { src: 'assets/img/gallery/21.jpg', caption: 'Gracias por cada sonrisa.' },
+  { src: 'assets/img/gallery/22.jpg', caption: 'Mi lugar seguro.' },
+  { src: 'assets/img/gallery/23.jpg', caption: 'El amor se ve así.' },
+  { src: 'assets/img/gallery/24.jpg', caption: 'Eres un regalo de Dios.' },
+  { src: 'assets/img/gallery/25.jpg', caption: 'Lo mejor de mis días.' },
+  { src: 'assets/img/gallery/26.jpg', caption: 'Mi compañía favorita.' },
+  { src: 'assets/img/gallery/27.jpg', caption: 'Dios sabía exactamente lo que hacía.' },
+  { src: 'assets/img/gallery/28.jpg', caption: 'Mi corazón te eligió.' },
+  { src: 'assets/img/gallery/29.jpg', caption: 'Tú haces que todo valga la pena.' },
+  { src: 'assets/img/gallery/30.jpg', caption: 'Amor bonito y tranquilo.' },
+  { src: 'assets/img/gallery/31.jpg', caption: 'Qué lindo es caminar contigo.' },
+  { src: 'assets/img/gallery/32.jpg', caption: 'Una historia que vale la pena contar.' },
+  { src: 'assets/img/gallery/33.jpg', caption: 'Mi tiburoncín hermosa. 🦈✨' },
+  { src: 'assets/img/gallery/34.jpg', caption: 'Eres respuesta y no coincidencia.' },
+  { src: 'assets/img/gallery/35.jpg', caption: 'Mi alegría favorita.' },
+  { src: 'assets/img/gallery/36.jpg', caption: 'Contigo aprendí que el amor también da paz.' },
+  { src: 'assets/img/gallery/37.jpg', caption: 'Un recuerdo más para agradecer.' },
+  { src: 'assets/img/gallery/38.jpg', caption: 'Cada día te admiro más.' },
+  { src: 'assets/img/gallery/39.jpg', caption: 'Lo mejor está contigo.' },
+  { src: 'assets/img/gallery/40.jpg', caption: 'Mi bendición favorita.' },
+  { src: 'assets/img/gallery/41.jpg', caption: 'Gracias por acompañar mi camino.' },
+  { src: 'assets/img/gallery/42.jpg', caption: 'Dios nos encontró antes de que nos encontráramos.' },
+  { src: 'assets/img/gallery/43.jpg', caption: 'Tú haces brillar mis días.' },
+  { src: 'assets/img/gallery/44.jpg', caption: 'Un amor guiado por Dios.' },
+  { src: 'assets/img/gallery/45.jpg', caption: 'Qué privilegio compartir la vida contigo.' },
+  { src: 'assets/img/gallery/46.jpg', caption: 'Mi felicidad tiene ojos bonitos.' },
+  { src: 'assets/img/gallery/47.jpg', caption: 'Te elegiría una y otra vez.' },
+  { src: 'assets/img/gallery/48.jpg', caption: 'Nuestro amor, Su propósito.' },
+  { src: 'assets/img/gallery/49.jpg', caption: 'Mi corazón está feliz contigo.' },
+  { src: 'assets/img/gallery/50.jpg', caption: 'Te amo más de lo que estas fotos pueden mostrar. ❤️' },
+];
 
-    // Lógica para reproducir/pausar videos al hacer clic
-    function registerVideoInteractions() {
-        const videoCards = document.querySelectorAll('.video-card');
-        videoCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const video = card.querySelector('video');
-                const playIcon = card.querySelector('.play-icon');
-                
-                if (video.paused) {
-                    // Detener cualquier otro video antes de reproducir este
-                    document.querySelectorAll('.video-card video').forEach(v => {
-                        v.pause();
-                        v.parentElement.querySelector('.play-icon').textContent = '▶';
-                    });
-                    
-                    video.play();
-                    playIcon.textContent = '⏸';
-                } else {
-                    video.pause();
-                    playIcon.textContent = '▶';
-                }
-            });
-        });
-    }
+// Videos: agrega los que tengas en assets/video/
+// Formatos soportados: mp4, webm, mov
+const videos = [
+  { src: 'assets/video/1.mp4', caption: 'Mi lugar favorito siempre será a tu lado.' },
+  { src: 'assets/video/2.mp4', caption: 'Momentos que guardo en el corazón.' },
+  { src: 'assets/video/3.mp4', caption: 'Contigo todo tiene más sentido.' },
+  // Agrega más videos aquí con el mismo formato
+];
 
-    // Algoritmo de Física Remanente/Inercia para Arrastre del Carrusel de Videos
-    function initializeInertialVideoSlider() {
-        if (!videoSlider) return;
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-        let velocity = 0;
-        let frameId = 0;
+// ===== CONSTRUIR CARRUSEL DE VIDEOS =====
+const storiesTrack = document.getElementById('storiesTrack');
 
-        videoSlider.addEventListener('mousedown', (e) => {
-            isDown = true;
-            videoSlider.classList.add('active');
-            startX = e.pageX - videoSlider.offsetLeft;
-            scrollLeft = videoSlider.scrollLeft;
-            cancelAnimationFrame(frameId);
-        });
+function buildVideos() {
+  if (!storiesTrack) return;
+  videos.forEach((v, i) => {
+    const card = document.createElement('div');
+    card.className = 'story-card';
+    card.innerHTML = `
+      <video src="${v.src}" muted loop preload="none" playsinline
+        onerror="this.closest('.story-card').style.display='none'">
+      </video>
+      <div class="story-play">
+        <svg width="18" height="18" fill="white" viewBox="0 0 24 24">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </div>
+      <div class="story-overlay">
+        <p class="story-num">Video ${String(i+1).padStart(2,'0')}</p>
+        <p class="story-title">${v.caption}</p>
+      </div>
+    `;
 
-        videoSlider.addEventListener('mouseleave', () => { isDown = false; });
-        videoSlider.addEventListener('mouseup', () => {
-            isDown = false;
-            videoSlider.classList.remove('active');
-            smoothInertiaLoop();
-        });
+    // Preview al hover
+    const vid = card.querySelector('video');
+    card.addEventListener('mouseenter', () => vid.play());
+    card.addEventListener('mouseleave', () => { vid.pause(); vid.currentTime = 0; });
 
-        videoSlider.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - videoSlider.offsetLeft;
-            const walk = (x - startX) * 1.5;
-            const prevScroll = videoSlider.scrollLeft;
-            videoSlider.scrollLeft = scrollLeft - walk;
-            velocity = videoSlider.scrollLeft - prevScroll;
-        });
+    // Abrir en lightbox al click
+    card.addEventListener('click', () => openVideoLightbox(v.src));
+    storiesTrack.appendChild(card);
+  });
+}
+buildVideos();
 
-        // Soporte Mobile Touch
-        videoSlider.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].pageX - videoSlider.offsetLeft;
-            scrollLeft = videoSlider.scrollLeft;
-            cancelAnimationFrame(frameId);
-        });
-        videoSlider.addEventListener('touchmove', (e) => {
-            const x = e.touches[0].pageX - videoSlider.offsetLeft;
-            const walk = (x - startX) * 1.2;
-            videoSlider.scrollLeft = scrollLeft - walk;
-        });
+// ===== CONSTRUIR MASONRY DE FOTOS =====
+const grid = document.getElementById('masonry-grid');
+const photoCountEl = document.getElementById('photoCount');
+let validPhotos = [];
 
-        function smoothInertiaLoop() {
-            if (Math.abs(velocity) > 0.5) {
-                videoSlider.scrollLeft += velocity;
-                velocity *= 0.93; // Nivel de fricción fluida
-                frameId = requestAnimationFrame(smoothInertiaLoop);
-            }
-        }
-    }
+function buildMasonry() {
+  if (!grid) return;
+  let loaded = 0;
+  const total = photos.length;
 
-    // 2. CONSTRUCCIÓN DE CUADRÍCULA DE FOTOS (Mosaico Asimétrico)
-    function generateGalleryStructure() {
-        let internalHTML = '';
-        
-        for (let i = 1; i <= totalImages; i++) {
-            const caption = moodCaptions[i % moodCaptions.length];
-            
-            internalHTML += `
-                <div class="masonry-item" data-index="${i}">
-                    <div class="absolute inset-0 gallery-card-overlay z-10 transition-opacity flex items-end p-6">
-                        <p class="text-white font-space uppercase text-xs tracking-widest opacity-90">${caption}</p>
-                    </div>
-                    <img 
-                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 4'%3E%3C/svg%3E" 
-                        data-src="assets/img/gallery/${i}.jpg" 
-                        alt="Isa Recuerdos Image ${i}" 
-                        class="lazy-loading"
-                    />
-                </div>
-            `;
-        }
-        masonryGrid.innerHTML = internalHTML;
-        initializeLazyLoading();
-        registerCardInteractions();
-    }
+  photos.forEach((p, i) => {
+    // Verificar que la imagen existe
+    const testImg = new Image();
+    testImg.onload = () => {
+      validPhotos.push({ ...p, index: i });
+      loaded++;
+      if (loaded === total) renderMasonry();
+    };
+    testImg.onerror = () => {
+      loaded++;
+      if (loaded === total) renderMasonry();
+    };
+    testImg.src = p.src;
+  });
+}
 
-    function initializeLazyLoading() {
-        const imageElements = masonryGrid.querySelectorAll('img');
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    const trueSource = img.getAttribute('data-src');
-                    img.src = trueSource;
-                    img.onload = () => {
-                        img.classList.remove('lazy-loading');
-                        img.classList.add('lazy-loaded');
-                    };
-                    observer.unobserve(img);
-                }
-            });
-        }, { rootMargin: '0px 0px 300px 0px' });
+function renderMasonry() {
+  // Ordena por índice original
+  validPhotos.sort((a, b) => a.index - b.index);
+  if (photoCountEl) photoCountEl.textContent = validPhotos.length + ' fotografías';
 
-        imageElements.forEach(img => imageObserver.observe(img));
-    }
+  validPhotos.forEach((p, i) => {
+    const item = document.createElement('div');
+    item.className = 'masonry-item';
+    item.innerHTML = `
+      <img src="${p.src}" alt="Recuerdo ${String(i+1).padStart(2,'0')}" loading="lazy">
+      <div class="masonry-caption">
+        <p class="masonry-caption-num">${String(i+1).padStart(2,'0')}</p>
+        <p class="masonry-caption-text">${p.caption}</p>
+      </div>
+    `;
+    item.addEventListener('click', () => openLightbox(i));
+    grid.appendChild(item);
+  });
+}
 
-    // 3. CONTROLADOR INTERACTIVO DEL LIGHTBOX
-    function registerCardInteractions() {
-        const items = document.querySelectorAll('.masonry-item');
-        items.forEach(item => {
-            item.addEventListener('click', () => {
-                const absoluteIndex = parseInt(item.getAttribute('data-index'), 10);
-                openLightbox(absoluteIndex);
-            });
-        });
-    }
+buildMasonry();
 
-    function openLightbox(index) {
-        currentActiveIndex = index;
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        renderLightboxActiveState();
-    }
+// ===== LIGHTBOX FOTOS =====
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lightbox-img');
+const lbCounter = document.getElementById('lightbox-counter');
+const lbCaption = document.getElementById('lightbox-caption');
+let currentIdx = 0;
 
-    function renderLightboxActiveState() {
-        lightboxImg.classList.remove('active');
-        setTimeout(() => {
-            lightboxImg.src = `assets/img/gallery/${currentActiveIndex}.jpg`;
-            lightboxCounter.textContent = `${String(currentActiveIndex).padStart(2, '0')} / ${totalImages}`;
-            
-            const captionIndex = currentActiveIndex % moodCaptions.length;
-            lightboxCaption.textContent = `Isa — ${moodCaptions[captionIndex]}.`;
-            
-            lightboxImg.onload = () => {
-                lightboxImg.classList.add('active');
-            };
-        }, 150);
-    }
+function openLightbox(idx) {
+  currentIdx = idx;
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  loadLightboxImg(idx);
+}
 
-    function closeLightbox() {
-        lightbox.classList.remove('active');
-        lightboxImg.classList.remove('active');
-        document.body.style.overflow = '';
-    }
+function loadLightboxImg(idx) {
+  const p = validPhotos[idx];
+  lbImg.classList.add('loading');
+  lbCounter.textContent = String(idx + 1).padStart(2, '0') + ' / ' + validPhotos.length;
+  lbCaption.textContent = p.caption;
 
-    function processNextImage() {
-        currentActiveIndex = currentActiveIndex >= totalImages ? 1 : currentActiveIndex + 1;
-        renderLightboxActiveState();
-    }
+  const tmp = new Image();
+  tmp.onload = () => {
+    lbImg.src = p.src;
+    lbImg.alt = p.caption;
+    requestAnimationFrame(() => lbImg.classList.remove('loading'));
+  };
+  tmp.src = p.src;
+}
 
-    function processPrevImage() {
-        currentActiveIndex = currentActiveIndex <= 1 ? totalImages : currentActiveIndex - 1;
-        renderLightboxActiveState();
-    }
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
 
-    closeLightboxBtn.addEventListener('click', closeLightbox);
-    nextBtn.addEventListener('click', processNextImage);
-    prevBtn.addEventListener('click', processPrevImage);
+document.getElementById('close-lightbox').addEventListener('click', closeLightbox);
+document.getElementById('lightboxBg').addEventListener('click', closeLightbox);
+document.getElementById('prev-btn').addEventListener('click', () => {
+  currentIdx = (currentIdx - 1 + validPhotos.length) % validPhotos.length;
+  loadLightboxImg(currentIdx);
+});
+document.getElementById('next-btn').addEventListener('click', () => {
+  currentIdx = (currentIdx + 1) % validPhotos.length;
+  loadLightboxImg(currentIdx);
+});
 
-    document.addEventListener('keydown', (e) => {
-        if (!lightbox.classList.contains('active')) return;
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowRight') processNextImage();
-        if (e.key === 'ArrowLeft') processPrevImage();
-    });
+// Teclado
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'ArrowRight') { currentIdx = (currentIdx + 1) % validPhotos.length; loadLightboxImg(currentIdx); }
+  if (e.key === 'ArrowLeft') { currentIdx = (currentIdx - 1 + validPhotos.length) % validPhotos.length; loadLightboxImg(currentIdx); }
+  if (e.key === 'Escape') closeLightbox();
+});
 
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox || e.target.id === 'lightbox-img-wrapper') {
-            closeLightbox();
-        }
-    });
+// ===== LIGHTBOX VIDEO =====
+const videoLightbox = document.getElementById('videoLightbox');
+const lbVideo = document.getElementById('lightboxVideo');
 
-    // Inicialización de Ejecución
-    generateVideoSlider();
-    generateGalleryStructure();
+function openVideoLightbox(src) {
+  lbVideo.src = src;
+  lbVideo.load();
+  lbVideo.play();
+  videoLightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVideoLightbox() {
+  lbVideo.pause();
+  lbVideo.src = '';
+  videoLightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('closeVideo').addEventListener('click', closeVideoLightbox);
+document.getElementById('videoBg').addEventListener('click', closeVideoLightbox);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && videoLightbox.classList.contains('open')) closeVideoLightbox();
 });

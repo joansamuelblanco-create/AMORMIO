@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <title>Una Carta — Tiburoncin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;1,300&family=Space+Grotesk:wght@400;500&family=Lora:ital,wght@0,400;1,400;1,500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/carta.css">
+</head>
+<body class="bg-[#050508] text-white/90 overflow-x-hidden antialiased">
+
+  <!-- Cursor -->
+  <div id="cursor-shark" class="cursor-shark">
+    <svg viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="55" cy="42" rx="40" ry="22" fill="#1e1e22" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
+      <ellipse cx="50" cy="48" rx="28" ry="12" fill="#141418"/>
+      <path d="M48 20 L58 8 L68 22" fill="#1e1e22" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" stroke-linejoin="round"/>
+      <path d="M90 35 L108 20 L108 38" fill="#1e1e22" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" stroke-linejoin="round"/>
+      <path d="M90 46 L108 55 L108 38" fill="#1a1a1e" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" stroke-linejoin="round"/>
+      <path d="M55 50 L45 62 L65 56" fill="#1a1a1e" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+      <circle cx="24" cy="40" r="3.5" fill="rgba(255,255,255,0.06)"/>
+      <circle cx="24" cy="40" r="2" fill="#050508"/>
+      <circle cx="25" cy="39" r="0.7" fill="rgba(255,255,255,0.7)"/>
+      <path d="M14 45 Q18 49 24 47" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div id="cursor-trail"></div>
+
+  <div class="film-grain"></div>
+  <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+    <div class="liquid-glow glow-1"></div>
+    <div class="liquid-glow glow-2"></div>
+  </div>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="tubelight-nav" id="mainNav">
+    <a href="index.html" class="nav-brand">Tiburoncin.</a>
+    <div class="nav-tabs">
+      <a href="index.html" class="nav-tab">
+        <svg class="tab-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+        <span>Inicio</span><div class="tab-glow"></div>
+      </a>
+      <a href="gallery.html" class="nav-tab">
+        <svg class="tab-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+        <span>Recuerdos</span><div class="tab-glow"></div>
+      </a>
+      <a href="reasons.html" class="nav-tab">
+        <svg class="tab-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+        <span>Razones</span><div class="tab-glow"></div>
+      </a>
+      <a href="carta.html" class="nav-tab active">
+        <svg class="tab-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+        <span>Carta</span><div class="tab-glow"></div>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header class="carta-hero">
+    <span class="section-tag">Escrita con el corazón</span>
+    <h1 class="carta-hero-title">Una carta<br><em>para ti</em></h1>
+    <p class="carta-hero-sub">Porque hay cosas que solo se dicen una vez,<br>pero se sienten para siempre.</p>
+    <div class="carta-hero-scroll">
+      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- ===== CARTA ===== -->
+  <main class="carta-main">
+    <article class="carta-paper" id="cartaPaper">
+
+      <!-- Encabezado -->
+      <div class="carta-paper-header reveal-block">
+        <span class="carta-label">Para</span>
+        <p class="carta-para">Mi querida tiburoncín,</p>
+      </div>
+
+      <!-- Párrafos -->
+      <div class="carta-body">
+
+        <p class="carta-p reveal-block">
+          No sabía muy bien cómo empezar esta carta, porque cuando se trata de ti siento tantas cosas que es difícil ponerlas en palabras.
+        </p>
+
+        <p class="carta-p reveal-block">
+          A veces me quedo pensando en todo lo que ha pasado desde que llegaste a mi vida. Y la verdad, todavía me sorprende que entre tantas personas en este mundo, Dios me permitiera encontrarte a ti. Porque sí, me enamoré de tu sonrisa, de tu belleza, de tu forma de ser, pero con el tiempo entendí que lo que realmente me hizo enamorarme fue todo lo que hay dentro de tu corazón.
+        </p>
+
+        <p class="carta-p reveal-block">
+          Y cuando digo que me enamoré de tu sonrisa, siento que me quedo corto. Porque tu risa tiene algo especial. Es de esas risas que contagian, que hacen que todo parezca más ligero. Me encanta verte reír. Me encanta cuando te emocionas contando algo, cuando te dan esos ataques de risa inesperados o cuando haces alguna de tus locuras. Sí, tus locuras. Porque una de las cosas más hermosas de amarte es poder verte ser tú misma. Y créeme, nunca me cansaré de eso.
+        </p>
+
+        <p class="carta-p reveal-block">
+          Me enamoré de la forma en que amas a Dios. De cómo buscas hacer las cosas bien. De tu ternura, sí, tu ternura, porque aunque a veces no te des cuenta, tienes una manera muy especial de cuidar a las personas que amas.
+        </p>
+
+        <p class="carta-p reveal-block">
+          También me enamoré de nuestros momentos simples. De nuestras conversaciones que parecen durar cinco minutos aunque pasen horas. De nuestras llamadas y videollamadas que se volvieron parte de mis días. De tus vlogsitos, porque me encanta ver el mundo a través de tus ojos. Me enamoré de tu manera de alegrar mis días incluso cuando no estás intentando hacerlo.
+        </p>
+
+        <p class="carta-p reveal-block">
+          Y hay recuerdos que guardo con muchísimo cariño. Como nuestra evangelización. Quizás para muchas personas fue un momento más, pero para mí fue algo muy especial. Porque sentí que Dios nos permitió acercarnos de una manera diferente, más profunda, más íntima y más sincera. Fue uno de esos momentos que se quedan grabados en el corazón.
+        </p>
+
+        <p class="carta-p reveal-block">
+          También pienso y me río cuando recuerdo nuestra primera pelea. Porque aunque en ese momento parecía algo importante, hoy la recuerdo y me doy cuenta de que incluso esos momentos forman parte de nuestra historia. Porque hemos aprendido, hemos crecido y seguimos eligiéndonos incluso cuando las cosas no son perfectas.
+        </p>
+
+        <p class="carta-p reveal-block">
+          Me enamoré de la paz que siento contigo. Esa tranquilidad de poder ser yo mismo, de no tener que fingir nada. Contigo puedo reír, hablar de cosas importantes, decir tonterías y aun así sentir que estoy exactamente donde quiero estar.
+        </p>
+
+        <p class="carta-p reveal-block">
+          Y algo que quizás no te digo lo suficiente es que me enamoré de la amistad que encontré en ti. Porque no solo eres la mujer que amo, también eres mi mejor amiga. Eres la persona con la que quiero compartir las buenas noticias, los sueños, los miedos y hasta los días difíciles.
+        </p>
+
+        <p class="carta-p reveal-block">
+          A veces imagino nuestro futuro y no puedo evitar sonreír. Pienso en nuestra primera Navidad juntos y en lo feliz que fui. Pero también pienso en todas las Navidades que quiero vivir contigo. Imagino una casa llena de amor, de risas, de momentos simples, de fotos en familia y de recuerdos que todavía no existen.
+        </p>
+
+        <p class="carta-p reveal-block">
+          Imagino nuestros planes de casarnos. Nuestra casa. Nuestros proyectos. Las metas que queremos cumplir juntos. Imagino a Elian, a Eithan y a Allison corriendo por la casa mientras nosotros los miramos agradeciendo a Dios por todo lo que hizo en nuestras vidas.
+        </p>
+
+        <p class="carta-p reveal-block">
+          Y más allá de los sueños materiales o de los planes bonitos, hay algo que me emociona aún más: construir una familia diferente. Romper cadenas generacionales. Sanar lo que tenga que ser sanado. Crear un hogar donde el amor de Dios sea el centro de todo. Un hogar donde nuestros hijos crezcan sintiéndose amados, escuchados y guiados por el Señor.
+        </p>
+
+        <p class="carta-p reveal-block">
+          Porque la verdad es que tú te convertiste en mucho más que una novia para mí. Eres mi compañera, mi mejor amiga, mi apoyo, mi refugio en muchos momentos y una de las mayores bendiciones que Dios me ha dado. Eres, sin duda, una parte fundamental de mi vida. Mi tiburoncín.
+        </p>
+
+        <p class="carta-p reveal-block">
+          Gracias por cada sonrisa, por cada mensaje, por cada llamada, por cada videollamada, por cada momento y por cada recuerdo que hemos construido. Gracias por ser tú.
+        </p>
+
+        <p class="carta-p reveal-block carta-p-strong">
+          No sé cuántas páginas necesitaría para escribir todo lo que siento, pero sí sé una cosa: cada día encuentro una nueva razón para enamorarme de ti.
+        </p>
+
+        <!-- Firma -->
+        <div class="carta-firma reveal-block">
+          <p class="carta-firma-love">Te amo, tiburoncín.</p>
+          <div class="carta-firma-sep"></div>
+          <p class="carta-firma-name">Con todo mi corazón,</p>
+          <p class="carta-firma-sign">Tu niño ❤️</p>
+          <div class="carta-firma-postdata reveal-block">
+            <p>Y si volviera a empezar mi vida mil veces,<br>seguiría pidiéndole a Dios que nuestros caminos se encontraran.</p>
+          </div>
+        </div>
+
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="relative z-20 border-t border-white/5 py-10 px-8 text-center mt-20">
+    <p class="font-space text-xs tracking-widest uppercase text-white/20">© 2026 Para Tiburoncin. Archivado con amor.</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="js/carta.js"></script>
+</body>
+</html>

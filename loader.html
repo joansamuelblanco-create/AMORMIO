@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Para mi Tiburoncín ❤️</title>
+
+    <link rel="icon"
+    href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🦈❤️</text></svg>'>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <title>Cargando... — Tiburoncin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;1,300&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/loader.css">
+</head>
+<body>
+
+  <!-- Grain overlay -->
+  <div class="film-grain"></div>
+
+  <!-- Glows de fondo -->
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <!-- Contenido principal -->
+  <div class="loader-wrapper">
+
+    <!-- Tiburoncín SVG animado -->
+    <div class="shark-container">
+      <svg class="shark-svg" viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+        <!-- Cuerpo principal -->
+        <ellipse cx="55" cy="42" rx="40" ry="22" fill="#2a2a2e" stroke="rgba(255,255,255,0.15)" stroke-width="1.2"/>
+        <!-- Vientre -->
+        <ellipse cx="50" cy="48" rx="28" ry="12" fill="#1a1a1f"/>
+        <!-- Aleta dorsal -->
+        <path d="M48 20 L58 8 L68 22" fill="#2a2a2e" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" stroke-linejoin="round"/>
+        <!-- Aleta caudal superior -->
+        <path d="M90 35 L108 20 L108 38" fill="#2a2a2e" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" stroke-linejoin="round"/>
+        <!-- Aleta caudal inferior -->
+        <path d="M90 46 L108 55 L108 38" fill="#252528" stroke="rgba(255,255,255,0.12)" stroke-width="1.2" stroke-linejoin="round"/>
+        <!-- Aleta pectoral -->
+        <path d="M55 50 L45 62 L65 56" fill="#252528" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+        <!-- Ojo -->
+        <circle cx="24" cy="40" r="3.5" fill="rgba(255,255,255,0.08)"/>
+        <circle cx="24" cy="40" r="2" fill="#0a0a0f"/>
+        <circle cx="25" cy="39" r="0.7" fill="rgba(255,255,255,0.6)"/>
+        <!-- Boca -->
+        <path d="M14 45 Q18 49 24 47" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-linecap="round"/>
+        <!-- Brillo sutil en cuerpo -->
+        <ellipse cx="40" cy="35" rx="15" ry="6" fill="rgba(255,255,255,0.03)"/>
+      </svg>
+    </div>
+
+    <!-- Texto principal -->
+    <div class="loader-text-main">
+      <p class="loading-label">Cargando los recuerdos más bonitos de mi vida...</p>
+      <p class="loading-sub">Hola tiburoncín <span class="heart">❤️</span></p>
+    </div>
+
+    <!-- Barra de progreso -->
+    <div class="progress-wrapper">
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
+      <p class="progress-phrase" id="progressPhrase">Conociéndote...</p>
+    </div>
+
+    <!-- Porcentaje -->
+    <p class="progress-percent" id="progressPercent">0%</p>
+
+  </div>
+
+  <script src="js/loader.js"></script>
+</body>
+</html>
