@@ -118,15 +118,16 @@ window.addEventListener('scroll', () => {
 
 // ===== AUTH CHECK + LOADER =====
 (function checkAuth() {
-  const auth = sessionStorage.getItem('amormio_auth');
   const visited = sessionStorage.getItem('amormio_visited');
+  const auth = sessionStorage.getItem('amormio_auth');
+
+  if (!visited && !auth) {
+    sessionStorage.setItem('amormio_visited', 'true');
+    window.location.href = 'loader.html';
+    return;
+  }
 
   if (!auth) {
-    if (!visited) {
-      sessionStorage.setItem('amormio_visited', 'true');
-      window.location.href = 'loader.html';
-    } else {
-      window.location.href = 'login.html';
-    }
+    window.location.href = 'login.html';
   }
 })();
