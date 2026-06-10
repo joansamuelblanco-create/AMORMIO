@@ -116,11 +116,17 @@ window.addEventListener('scroll', () => {
   }
 }, { passive: true });
 
-// ===== AUTH CHECK =====
-// Si no hay sesión, redirige al login
+// ===== AUTH CHECK + LOADER =====
 (function checkAuth() {
   const auth = sessionStorage.getItem('amormio_auth');
+  const visited = sessionStorage.getItem('amormio_visited');
+
   if (!auth) {
-    window.location.href = 'login.html';
+    if (!visited) {
+      sessionStorage.setItem('amormio_visited', 'true');
+      window.location.href = 'loader.html';
+    } else {
+      window.location.href = 'login.html';
+    }
   }
 })();
