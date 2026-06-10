@@ -236,7 +236,6 @@ a, button { cursor: none; }
 }
 
 /* ===== CONTADOR ===== */
-.counter-wrapper { }
 .counter-grid {
   display: flex;
   align-items: center;
